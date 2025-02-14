@@ -8,19 +8,18 @@ export default function Presentation() {
         <div className="flex flex-col items-center space-y-4 text-center">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-              Jane Doe
+              Robinson Fang
             </h1>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl">
-              Bestselling author of contemporary fiction, exploring the depths of human emotions and
-              relationships.
+              Todo el mundo me dice Robin y soy de 🇦🇷
             </p>
           </div>
           <div className="space-x-4">
-            <Link href="#contact">
+            {/* <Link href="#contact">
               <Button>Get in Touch</Button>
-            </Link>
+            </Link> */}
             <Link href="#works">
-              <Button variant="outline">Explore My Works</Button>
+              <Button variant="outline">Escritos</Button>
             </Link>
           </div>
         </div>

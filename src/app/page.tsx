@@ -29,8 +29,8 @@ export default function Home() {
           <Presentation />
           <FeaturedWorks isMobile={isMobile} />
           <AboutSection />
-          <Testimonials />
-          <Newsletter />
+          {/* <Testimonials />
+          <Newsletter /> */}
         </main>
         <Footer />
       </div>
