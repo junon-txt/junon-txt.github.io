@@ -23,14 +23,14 @@ const books: Book[] = [
     title: "China diary",
     description: "Un breve diario que escribí durante un viaje con mi padre.",
     image: "/images/chinadiary.jpg",
-    link: "/china-diary",
+    link: "/china-diary/entries/01/",
   },
   {
     id: 2,
     title: "ZhōngGuó II",
     description: "Una novela sobre estos tiempos modernos.",
     image: "/images/l2map.jpg",
-    link: "/zhongguo-ii-pages",
+    link: "/zhongguo-ii-pages/I/",
   },
   {
     id: 3,
