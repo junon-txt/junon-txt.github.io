@@ -9,15 +9,23 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const books = [
+type Book = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+};
+
+const books: Book[] = [
   {
     id: 1,
     title: "China diary",
     description: "Un breve diario que escribí durante un viaje con mi padre.",
     image: "/images/chinadiary.jpg",
     link: "/china-diary",
-},
-{
+  },
+  {
     id: 2,
     title: "ZhōngGuó II",
     description: "Una novela sobre estos tiempos modernos.",
@@ -33,8 +41,7 @@ const books = [
   },
 ];
 
-// Component for the mobile layout with Carousel
-const MobileLayout = ({ books }: { books: typeof books }) => (
+const MobileLayout = ({ books }: { books: Book[] }) => (
   <Carousel className="w-full max-w-sm mx-auto">
     <CarouselContent>
       {books.map((book) => (
@@ -63,7 +70,7 @@ const MobileLayout = ({ books }: { books: typeof books }) => (
   </Carousel>
 );
 
-const DesktopLayout = ({ books }: { books: typeof books }) => (
+const DesktopLayout = ({ books }: { books: Book[] }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {books.map((book) => (
       <div key={book.id} className="flex flex-col items-center space-y-2">
@@ -84,7 +91,6 @@ const DesktopLayout = ({ books }: { books: typeof books }) => (
   </div>
 );
 
-// Main Component
 export default function FeaturedWorks({ isMobile }: { isMobile: boolean }) {
   return (
     <section id="works" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
