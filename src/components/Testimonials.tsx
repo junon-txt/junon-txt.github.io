@@ -9,8 +9,8 @@ export default function Testimonials() {
             {[1, 2, 3].map((testimonial) => (
               <div key={testimonial} className="flex flex-col items-center space-y-2 text-center">
                 <p className="text-gray-500 italic">
-                  "Jane's writing is captivating and deeply moving. Her characters feel so real, I can't help but
-                  get lost in their stories."
+                  &quot;Jane&apos;s writing is captivating and deeply moving. Her characters feel so real, I can&apos;t help but
+                  get lost in their stories.&quot;
                 </p>
                 <p className="font-bold">- Reader {testimonial}</p>
               </div>
