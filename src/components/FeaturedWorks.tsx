@@ -1,21 +1,18 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { useState, useEffect, useCallback } from "react"
+import useEmblaCarousel from "embla-carousel-react"
 
 type Book = {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  link: string;
-};
+  id: number
+  title: string
+  description: string
+  image: string
+  link: string
+}
 
 const books: Book[] = [
   {
@@ -39,67 +36,100 @@ const books: Book[] = [
     image: "/images/argchina.jpg",
     link: "/fang-huizhen",
   },
-];
+  {
+    id: 4,
+    title: "Cuentos",
+    description: "Cuentos.",
+    image: "/images/cuentos.jpg",
+    link: "/cuentos",
+  },
+]
 
-const MobileLayout = ({ books }: { books: Book[] }) => (
-  <Carousel className="w-full max-w-sm mx-auto">
-    <CarouselContent>
-      {books.map((book) => (
-        <CarouselItem key={book.id}>
-          <div className="p-1">
-            <div className="flex flex-col items-center space-y-2 bg-white p-4 rounded-lg shadow-md">
-              <Image
-                src={book.image}
-                alt={`Book cover for ${book.title}`}
-                width={200}
-                height={300}
-                className="rounded-lg w-[300px] h-[300px] object-cover"
-              />
-              <h3 className="text-xl font-bold">{book.title}</h3>
-              <p className="text-sm text-gray-500 text-center">{book.description}</p>
-              <Link href={book.link}>
-                <Button variant="outline" size="sm">Leer</Button>
-              </Link>
+const Carousel = ({ books, isMobile }: { books: Book[]; isMobile: boolean }) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+    slidesToScroll: isMobile ? 1 : 3, // Scroll 1 slide on mobile, 3 on desktop
+  })
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi])
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [emblaApi])
+
+  useEffect(() => {
+    if (!emblaApi) return
+
+    // Attach the event listener
+    emblaApi.on("select", onSelect)
+
+    return () => {
+      if (emblaApi) {
+        emblaApi.off("select", onSelect)
+      }
+    }
+  }, [emblaApi, onSelect])
+
+  return (
+    <div className="relative">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex space-x-4">
+          {books.map((book) => (
+            <div key={book.id} className="flex-none w-[320px]">
+              <div className="flex flex-col bg-white p-4 rounded-lg shadow-md h-[450px] w-full">
+                <Image
+                  src={book.image || "/placeholder.svg"}
+                  alt={`Book cover for ${book.title}`}
+                  width={280}
+                  height={280}
+                  className="rounded-lg w-[280px] h-[280px] object-cover"
+                />
+                {/* Centered text */}
+                <div className="flex flex-grow flex-col items-center justify-center text-center">
+                  <h3 className="text-xl font-bold">{book.title}</h3>
+                  <p className="text-sm text-gray-500">{book.description}</p>
+                </div>
+                {/* Centered button */}
+                <div className="flex items-center justify-center mt-2">
+                  <Link href={book.link}>
+                    <Button variant="outline" size="sm">
+                      Leer
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
-        </CarouselItem>
-      ))}
-    </CarouselContent>
-    <CarouselPrevious />
-    <CarouselNext />
-  </Carousel>
-);
-
-const DesktopLayout = ({ books }: { books: Book[] }) => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {books.map((book) => (
-      <div key={book.id} className="flex flex-col items-center space-y-2">
-        <Image
-          src={book.image}
-          alt={`Book cover for ${book.title}`}
-          width={300}
-          height={400}
-          className="rounded-lg w-[300px] h-[300px] object-cover"
-        />
-        <h3 className="text-xl font-bold">{book.title}</h3>
-        <p className="text-sm text-gray-500 text-center">{book.description}</p>
-        <Link href={book.link}>
-          <Button variant="outline">Leer</Button>
-        </Link>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-);
+      {/* Conditionally render dots only on mobile */}
+      {isMobile && (
+        <div className="flex justify-center mt-4">
+          {books.map((_, index) => (
+            <button
+              key={index}
+              className={`h-2 w-2 rounded-full mx-1 ${
+                index === selectedIndex ? "bg-gray-800" : "bg-gray-300"
+              }`}
+              onClick={() => scrollTo(index)}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
-export default function FeaturedWorks({ isMobile }: { isMobile: boolean }) {
+export default function FeaturedWorks({ isMobile }: {isMobile: boolean}) {
   return (
     <section id="works" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8">
-          Escritos
-        </h2>
-        {isMobile ? <MobileLayout books={books} /> : <DesktopLayout books={books} />}
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8">Escritos</h2>
+        <Carousel books={books} isMobile={isMobile} />
       </div>
     </section>
-  );
+  )
 }
