@@ -30,7 +30,7 @@ export default function AboutSection() {
             height={400}
             className="mx-auto aspect-square rounded-full object-cover"
           />
-          <div className="flex flex-col justify-center space-y-4">
+          <div className="flex flex-col text-center space-y-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Sobre mí</h2>
             <p className="text-gray-500 md:text-xl">
               Me gusta jugar Yu-gi-oh! 🫰
