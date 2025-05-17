@@ -8,7 +8,7 @@ export default function Presentation() {
       <AnimatedBackground />
       <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48">
         <div className="container mx-auto">
-          <div className="flex flex-col items-center space-y-4 text-center">
+          <div className="flex flex-col items-center space-y-4 text-center bg-white/40 backdrop-blur-[2px] rounded-xl p-8">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-gray-900">
               Robinson Fang
             </h1>
