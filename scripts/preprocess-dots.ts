@@ -5,7 +5,8 @@ import { existsSync, mkdirSync, writeFileSync, readFileSync } from 'fs';
 import yaml from 'js-yaml';
 
 const __filename = fileURLToPath(import.meta.url);
-const projectRoot = process.cwd();
+const __dirname = dirname(__filename);
+const projectRoot = join(__dirname, '..');
 
 interface DotConfig {
   name: string;
@@ -129,7 +130,7 @@ async function processAllImages() {
 
   // Process each pattern
   for (const pattern of config.patterns) {
-    const inputPath = join(projectRoot, 'public', pattern.input);
+    const inputPath = join(projectRoot, pattern.input);
     const outputPath = join(outputDir, pattern.output);
     
     if (!existsSync(inputPath)) {
