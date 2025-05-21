@@ -1,0 +1,49 @@
+patterns:
+  - name: rilakkuma_mask_1
+    input: /src/assets/bg/rilakkuma_mask.png
+    output: rilakkuma_mask_1.svg
+    size: 4
+    radius: 1.2
+    className: absolute w-[90px] h-[90px] md:w-[300px] md:h-[300px] left-[0%] top-[5%] animate-float-1
+
+  - name: me01
+    input: /src/assets/bg/me01.png
+    output: me01.svg
+    size: 12
+    radius: 2
+    className: absolute w-[75px] h-[75px] md:w-[250px] md:h-[250px] right-[1%] top-[8%] animate-float-2
+
+  - name: me03
+    input: /src/assets/bg/me03.png
+    output: me03.svg
+    size: 12
+    radius: 2
+    className: absolute w-[60px] h-[60px] md:w-[200px] md:h-[200px] left-[1%] bottom-[10%] animate-float-3
+
+  - name: priestess
+    input: /src/assets/bg/priestess.png
+    output: priestess.svg
+    size: 12
+    radius: 2
+    className: absolute w-[60px] h-[60px] md:w-[200px] md:h-[200px] left-[45%] bottom-[15%] animate-float-3
+
+  - name: madolche
+    input: /src/assets/bg/madolche.png
+    output: madolche.svg
+    size: 12
+    radius: 2
+    className: absolute w-[60px] h-[60px] md:w-[200px] md:h-[200px] right-[25%] bottom-[5%] animate-float-3
+
+  - name: chalice
+    input: /src/assets/bg/chalice.png
+    output: chalice.svg
+    size: 12
+    radius: 2
+    className: absolute w-[60px] h-[60px] md:w-[200px] md:h-[200px] left-[15%] bottom-[5%] animate-float-3
+
+  - name: rilakkuma_mask_2
+    input: /src/assets/bg/rilakkuma_mask.png
+    output: rilakkuma_mask_2.svg
+    size: 4
+    radius: 1.2
+    className: absolute w-[84px] h-[84px] md:w-[280px] md:h-[280px] right-[1%] bottom-[5%] animate-float-4
